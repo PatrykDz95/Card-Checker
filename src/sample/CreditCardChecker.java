@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -78,12 +77,10 @@ public class CreditCardChecker extends Application {
     public boolean isNumber(TextField number, TextField CCV, TextField DDinput, TextField MMinput,
                             TextField YYYYinput, String MSG, TextField CorrectOrNot) {
 
-        String cardNumb = number.getText();
-        String cardNumbWithoutSpaces = cardNumb.replaceAll("\\s", "");
+        String cardNumbWithoutSpaces = number.getText().replaceAll("\\s", "");
         int CCVLenght = CCV.getLength();
         int dayBox = Integer.parseInt(DDinput.getText());
         int monthBox = Integer.parseInt(MMinput.getText());
-
         DateFormat df = new SimpleDateFormat("ddMMyyyy");
         Date todaysDate = new Date();
         Checking checking = new Checking();
@@ -91,19 +88,12 @@ public class CreditCardChecker extends Application {
         try {
 //            String cos = null;
 //            String co = null;
-//            Date inputDate;
-          // checking.ZerosInDate(DDinput, MMinput,YYYYinput, df, inputDate);
-//            if(DDinput.getText().length()==1){
-//               cos = (String.format("%01d", DDinput.getText()));
-//
-//            }
-//            if(MMinput.getText().length()==1){
-//                co = ( String.format("%01d", DDinput.getText()));
-//            }
+            Date inputDate = null;
+            //checking.ZerosInDate(DDinput, MMinput, YYYYinput, cos, co, inputDate, df);
+            inputDate = df.parse( DDinput.getText() + MMinput.getText() + YYYYinput.getText());
 
-           Date inputDate = df.parse(DDinput.getText() + MMinput.getText() + YYYYinput.getText());
-
-            if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) && todaysDate.before(inputDate) &&
+            if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) &&
+                    (todaysDate.before(inputDate) || df.format(todaysDate).equals(df.format(inputDate))) &&
                     checking.DayMonthInput(dayBox, monthBox) && checking.LuhnAlgorithm(cardNumbWithoutSpaces))
             {
                 CorrectOrNot.setText("Card is valid");

@@ -28,15 +28,16 @@ public class Checking {
     }
 
     public void ZerosInDate(TextField DDinput, TextField MMinput,
-                               TextField YYYYinput, DateFormat df) {
+                               TextField YYYYinput, DateFormat df, Date inputDate) {
+
         try {
-            Date InputDate;
+
             if (DDinput.getText().length() == 1) {
-                InputDate = df.parse('0' + DDinput.getText() + MMinput.getText() + YYYYinput.getText());
+                inputDate = df.parse(0 + DDinput.getText() + MMinput.getText() + YYYYinput.getText());
             } else if (MMinput.getText().length() == 1) {
-                InputDate = df.parse(DDinput.getText() + '0' + MMinput.getText() + YYYYinput.getText());
+                inputDate = df.parse(DDinput.getText() + 0 + MMinput.getText() + YYYYinput.getText());
             } else if (DDinput.getText().length() == 1 && MMinput.getText().length() == 1) {
-                InputDate = df.parse('0' + DDinput.getText() + '0' + MMinput.getText() + YYYYinput.getText());
+                inputDate = df.parse(0 + DDinput.getText() + 0 + MMinput.getText() + YYYYinput.getText());
             }
 
         } catch (Exception e) {

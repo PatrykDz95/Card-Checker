@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -88,11 +89,21 @@ public class CreditCardChecker extends Application {
         Checking checking = new Checking();
 
         try {
-            Date inputDate = df.parse(DDinput.getText() + MMinput.getText() + YYYYinput.getText());
+//            String cos = null;
+//            String co = null;
+//            Date inputDate;
+          // checking.ZerosInDate(DDinput, MMinput,YYYYinput, df, inputDate);
+//            if(DDinput.getText().length()==1){
+//               cos = (String.format("%01d", DDinput.getText()));
+//
+//            }
+//            if(MMinput.getText().length()==1){
+//                co = ( String.format("%01d", DDinput.getText()));
+//            }
 
-            checking.ZerosInDate(DDinput, MMinput,YYYYinput, df);
+           Date inputDate = df.parse(DDinput.getText() + MMinput.getText() + YYYYinput.getText());
 
-            if ("^[\\d]{12,19}$".matches(cardNumbWithoutSpaces) && (CCVLenght == 3) && todaysDate.before(inputDate) &&
+            if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) && todaysDate.before(inputDate) &&
                     checking.DayMonthInput(dayBox, monthBox) && checking.LuhnAlgorithm(cardNumbWithoutSpaces))
             {
                 CorrectOrNot.setText("Card is valid");

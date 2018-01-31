@@ -56,26 +56,35 @@ public class CreditCardChecker extends Application {
         YYYYinput.setMaxWidth(43);
         GridPane.setConstraints(YYYYinput, 6, 0);
 
+
         TextField CorrectOrNot = new TextField();
+        CorrectOrNot.setEditable(false);
         GridPane.setConstraints(CorrectOrNot, 0, 7);
+
+        TextField Company = new TextField();
+        Company.setPromptText("Company");
+        Company.setMaxWidth(150);
+        Company.setEditable(false);
+        GridPane.setConstraints(Company, 0,8);
+
 
         GridPane.setConstraints(btn, 0, 4);
         btn.setMaxWidth(300);
 
         btn.setText("Check your credit card!");
         btn.setOnAction(e
-                -> isNumber(CardNumInput, CCVInput, DDinput, MMinput, YYYYinput, CardNumInput.getText(), CorrectOrNot));
+                -> isNumber(CardNumInput, CCVInput, DDinput, MMinput, YYYYinput, CorrectOrNot , Company));
 
-        grid.getChildren().addAll(CardNumInput, CCVInput, DDinput, MMinput, YYYYinput, btn, CorrectOrNot);
+        grid.getChildren().addAll(CardNumInput, CCVInput, DDinput, MMinput, YYYYinput, btn, CorrectOrNot, Company);
 
-        Scene scene = new Scene(grid, 350, 150);
+        Scene scene = new Scene(grid, 400, 200);
         window.setScene(scene);
 
         window.show();
     }
 
     public boolean isNumber(TextField number, TextField CCV, TextField DDinput, TextField MMinput,
-                            TextField YYYYinput, String MSG, TextField CorrectOrNot) {
+                            TextField YYYYinput, TextField CorrectOrNot, TextField Company) {
 
         String cardNumbWithoutSpaces = number.getText().replaceAll("\\s", "");
         int CCVLenght = CCV.getLength();
@@ -85,18 +94,35 @@ public class CreditCardChecker extends Application {
         Date todaysDate = new Date();
         Checking checking = new Checking();
 
+
+
+
         try {
-//            String cos = null;
-//            String co = null;
-            Date inputDate = null;
-            //checking.ZerosInDate(DDinput, MMinput, YYYYinput, cos, co, inputDate, df);
-            inputDate = df.parse( DDinput.getText() + MMinput.getText() + YYYYinput.getText());
+            String OneDigitDay;
+            String OneDigitMonth;
+            Date inputDate;
+
+           // checking.ZerosInDate(DDinput, MMinput, YYYYinput, OneDigitDay, OneDigitMonth);
+
+            if(DDinput.getText().length()==1){
+                OneDigitDay = (String.format(0 + DDinput.getText()));
+            }else{
+                OneDigitDay = DDinput.getText();
+            }
+            if(MMinput.getText().length()==1){
+                OneDigitMonth = ( String.format(0 + MMinput.getText()));
+            }else{
+                OneDigitMonth = MMinput.getText();
+            }
+
+            inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
 
             if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) &&
                     (todaysDate.before(inputDate) || df.format(todaysDate).equals(df.format(inputDate))) &&
                     checking.DayMonthInput(dayBox, monthBox) && checking.LuhnAlgorithm(cardNumbWithoutSpaces))
             {
-                CorrectOrNot.setText("Card is valid");
+                CorrectOrNot.setText("Your card is valid");
+                checking.CompanyNumbers(cardNumbWithoutSpaces, Company);
             } else {
                 CorrectOrNot.setText("Error");
             }

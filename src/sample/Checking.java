@@ -1,9 +1,7 @@
 package sample;
 
 import javafx.scene.control.TextField;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Checking {
 
@@ -29,23 +27,23 @@ public class Checking {
     }
 
     public void ZerosInDate(TextField DDinput, TextField MMinput, TextField YYYYinput,
-                            String cos, String co,Date inputDate, DateFormat df) {
+                            String OneDigitDay, String OneDigitMonth) {
 
         try {
-
             if(DDinput.getText().length()==1){
-                cos = (String.format(0 + DDinput.getText()));
-            }else {
-                cos =  DDinput.getText();
+                OneDigitDay = (String.format(0 + DDinput.getText()));
+            }else{
+                  OneDigitDay = DDinput.getText();
             }
-
             if(MMinput.getText().length()==1){
-                co = ( String.format(0 + MMinput.getText()));
-            }else {
-                co = MMinput.getText();
+                  OneDigitMonth = ( String.format(0 + MMinput.getText()));
+            }else{
+                 OneDigitMonth = MMinput.getText();
             }
 
-            inputDate = df.parse(cos + co + YYYYinput.getText());
+
+
+
 
 //            if (DDinput.getText().length() == 1) {
 //                inputDate = df.parse(0 + DDinput.getText() + MMinput.getText() + YYYYinput.getText());
@@ -59,6 +57,52 @@ public class Checking {
             e.getStackTrace();
         }
 
+
     }
 
-}
+    public void CompanyNumbers( String cardNumbWithoutSpaces, TextField Company){
+        ArrayList<String> listOfPattern=new ArrayList<>();
+
+        String ptVisa = "^4[0-9]{6,}$";
+        listOfPattern.add(ptVisa);
+        String ptMasterCard = "^5[1-5][0-9]{5,}$";
+        listOfPattern.add(ptMasterCard);
+        String ptAmeExp = "^3[47][0-9]{5,}$";
+        listOfPattern.add(ptAmeExp);
+        String ptDinClb = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$";
+        listOfPattern.add(ptDinClb);
+        String ptDiscover = "^6(?:011|5[0-9]{2})[0-9]{3,}$";
+        listOfPattern.add(ptDiscover);
+        String ptJcb = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$";
+        listOfPattern.add(ptJcb);
+
+        for(String p : listOfPattern){
+            if(cardNumbWithoutSpaces.matches(p)){
+                Company.setText(CompanyName(p));
+                break;
+            }
+        }
+
+        }
+
+        String CompanyName (String p){
+        if(p.equals("^4[0-9]{6,}$")){
+            return "Visa";
+        }else if(p.equals("^5[1-5][0-9]{5,}$")){
+                return "MasterCard";
+        }else if(p.equals("^3[47][0-9]{5,}$")){
+                return "American Express";
+        }else if(p.equals("^3(?:0[0-5]|[68][0-9])[0-9]{4,}$")){
+                return "Diners Club";
+        }else if(p.equals("^6(?:011|5[0-9]{2})[0-9]{3,}$")){
+            return "Discover";
+        }else if(p.equals("^(?:2131|1800|35[0-9]{3})[0-9]{3,}$")){
+            return "JCB";
+        }
+        return p;
+        }
+
+
+    }
+
+

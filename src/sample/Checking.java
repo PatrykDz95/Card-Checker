@@ -28,7 +28,6 @@ public class Checking {
 
     public void ZerosInDate(TextField DDinput, TextField MMinput, TextField YYYYinput,
                             String OneDigitDay, String OneDigitMonth) {
-
         try {
             if(DDinput.getText().length()==1){
                 OneDigitDay = (String.format(0 + DDinput.getText()));
@@ -40,26 +39,10 @@ public class Checking {
             }else{
                  OneDigitMonth = MMinput.getText();
             }
-
-
-
-
-
-//            if (DDinput.getText().length() == 1) {
-//                inputDate = df.parse(0 + DDinput.getText() + MMinput.getText() + YYYYinput.getText());
-//            } else if (MMinput.getText().length() == 1) {
-//                inputDate = df.parse(DDinput.getText() + 0 + MMinput.getText() + YYYYinput.getText());
-//            } else if (DDinput.getText().length() == 1 && MMinput.getText().length() == 1) {
-//                inputDate = df.parse(0 + DDinput.getText() + 0 + MMinput.getText() + YYYYinput.getText());
-//            }
-
         } catch (Exception e) {
             e.getStackTrace();
         }
-
-
     }
-
     public void CompanyNumbers( String cardNumbWithoutSpaces, TextField Company){
         ArrayList<String> listOfPattern=new ArrayList<>();
 

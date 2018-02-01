@@ -39,20 +39,20 @@ public class CreditCardChecker extends Application {
 
 
         TextField DDinput = new TextField();
-        DDinput.setPromptText("DD");
+        DDinput.setPromptText("Day");
 
         DDinput.setMaxWidth(37);
         GridPane.setConstraints(DDinput, 4, 0);
 
 
         TextField MMinput = new TextField();
-        MMinput.setPromptText("MM");
+        MMinput.setPromptText("Month");
         MMinput.setMaxWidth(37);
         GridPane.setConstraints(MMinput, 5, 0);
 
 
         TextField YYYYinput = new TextField();
-        YYYYinput.setPromptText("YYYY");
+        YYYYinput.setPromptText("Year");
         YYYYinput.setMaxWidth(43);
         GridPane.setConstraints(YYYYinput, 6, 0);
 

@@ -43,49 +43,24 @@ public class Checking {
             e.getStackTrace();
         }
     }
-    public void CompanyNumbers( String cardNumbWithoutSpaces, TextField Company){
-        ArrayList<String> listOfPattern=new ArrayList<>();
+    public void CompanyName(String cardNumbWithoutSpaces, TextField Company){
 
-        String ptVisa = "^4[0-9]{6,}$";
-        listOfPattern.add(ptVisa);
-        String ptMasterCard = "^5[1-5][0-9]{5,}$";
-        listOfPattern.add(ptMasterCard);
-        String ptAmeExp = "^3[47][0-9]{5,}$";
-        listOfPattern.add(ptAmeExp);
-        String ptDinClb = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$";
-        listOfPattern.add(ptDinClb);
-        String ptDiscover = "^6(?:011|5[0-9]{2})[0-9]{3,}$";
-        listOfPattern.add(ptDiscover);
-        String ptJcb = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$";
-        listOfPattern.add(ptJcb);
-
-        for(String p : listOfPattern){
-            if(cardNumbWithoutSpaces.matches(p)){
-                Company.setText(CompanyName(p));
-                break;
-            }
+        if(cardNumbWithoutSpaces.matches("^4[0-9]{6,}$")){
+            Company.setText("Visa");
+        }else if(cardNumbWithoutSpaces.matches("^5[1-5][0-9]{5,}$")){
+            Company.setText("MasterCard");
+        }else if(cardNumbWithoutSpaces.matches("^3[47][0-9]{5,}$")){
+            Company.setText("American Express");
+        }else if(cardNumbWithoutSpaces.matches("^3(?:0[0-5]|[68][0-9])[0-9]{4,}$")){
+            Company.setText("Diners Club");
+        }else if(cardNumbWithoutSpaces.matches("^6(?:011|5[0-9]{2})[0-9]{3,}$")){
+            Company.setText("Discover");
+        }else if(cardNumbWithoutSpaces.matches("^(?:2131|1800|35[0-9]{3})[0-9]{3,}$")){
+            Company.setText("JCB");
+        }else {
+            Company.setText("Not Available");
         }
-
         }
-
-        String CompanyName (String p){
-        if(p.equals("^4[0-9]{6,}$")){
-            return "Visa";
-        }else if(p.equals("^5[1-5][0-9]{5,}$")){
-                return "MasterCard";
-        }else if(p.equals("^3[47][0-9]{5,}$")){
-                return "American Express";
-        }else if(p.equals("^3(?:0[0-5]|[68][0-9])[0-9]{4,}$")){
-                return "Diners Club";
-        }else if(p.equals("^6(?:011|5[0-9]{2})[0-9]{3,}$")){
-            return "Discover";
-        }else if(p.equals("^(?:2131|1800|35[0-9]{3})[0-9]{3,}$")){
-            return "JCB";
-        }
-        return p;
-        }
-
-
     }
 
 

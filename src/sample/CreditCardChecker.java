@@ -39,14 +39,13 @@ public class CreditCardChecker extends Application {
 
 
         TextField DDinput = new TextField();
-        DDinput.setPromptText("Day");
-
+        DDinput.setPromptText("DD");
         DDinput.setMaxWidth(37);
         GridPane.setConstraints(DDinput, 4, 0);
 
 
         TextField MMinput = new TextField();
-        MMinput.setPromptText("Month"); 
+        MMinput.setPromptText("MM");
         MMinput.setMaxWidth(37);
         GridPane.setConstraints(MMinput, 5, 0);
 
@@ -122,7 +121,7 @@ public class CreditCardChecker extends Application {
                     checking.DayMonthInput(dayBox, monthBox) && checking.LuhnAlgorithm(cardNumbWithoutSpaces))
             {
                 CorrectOrNot.setText("Your card is valid");
-                checking.CompanyNumbers(cardNumbWithoutSpaces, Company);
+                checking.CompanyName(cardNumbWithoutSpaces, Company);
             } else {
                 CorrectOrNot.setText("Error");
             }

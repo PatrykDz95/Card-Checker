@@ -46,7 +46,7 @@ public class CreditCardChecker extends Application {
 
 
         TextField MMinput = new TextField();
-        MMinput.setPromptText("Month");
+        MMinput.setPromptText("Month"); 
         MMinput.setMaxWidth(37);
         GridPane.setConstraints(MMinput, 5, 0);
 

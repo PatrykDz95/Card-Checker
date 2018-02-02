@@ -86,20 +86,19 @@ public class CreditCardChecker extends Application {
                             TextField YYYYinput, TextField CorrectOrNot, TextField Company) {
 
         String cardNumbWithoutSpaces = number.getText().replaceAll("\\s", "");
+
         int CCVLenght = CCV.getLength();
         int dayBox = Integer.parseInt(DDinput.getText());
         int monthBox = Integer.parseInt(MMinput.getText());
+
         DateFormat df = new SimpleDateFormat("ddMMyyyy");
         Date todaysDate = new Date();
         Checking checking = new Checking();
 
-
-
+        String OneDigitDay;
+        String OneDigitMonth;
 
         try {
-            String OneDigitDay;
-            String OneDigitMonth;
-            Date inputDate;
 
            // checking.ZerosInDate(DDinput, MMinput, YYYYinput, OneDigitDay, OneDigitMonth);
 
@@ -114,7 +113,7 @@ public class CreditCardChecker extends Application {
                 OneDigitMonth = MMinput.getText();
             }
 
-            inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
+            Date inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
 
             if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) &&
                     (todaysDate.before(inputDate) || df.format(todaysDate).equals(df.format(inputDate))) &&

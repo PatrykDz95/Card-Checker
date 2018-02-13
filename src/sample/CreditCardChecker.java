@@ -82,6 +82,16 @@ public class CreditCardChecker extends Application {
         window.show();
     }
 
+    /**
+     * @param number the card number
+     * @param CCV the 3 digit ccv
+     * @param DDinput the textfield entered day
+     * @param MMinput the textfield entered month
+     * @param YYYYinput the textfield entered year
+     * @param CorrectOrNot Textfield displaying 'valid' if all informations are correct else 'error'
+     * @param Company TextField which shows the name of the card company
+     * @return true if everything's correct else false
+     */
     public boolean isNumber(TextField number, TextField CCV, TextField DDinput, TextField MMinput,
                             TextField YYYYinput, TextField CorrectOrNot, TextField Company) {
 
@@ -95,12 +105,10 @@ public class CreditCardChecker extends Application {
         Date todaysDate = new Date();
         Checking checking = new Checking();
 
-        String OneDigitDay;
-        String OneDigitMonth;
-
+        String OneDigitDay = null;
+        String OneDigitMonth= null;
+        Date inputDate= null;
         try {
-
-           // checking.ZerosInDate(DDinput, MMinput, YYYYinput, OneDigitDay, OneDigitMonth);
 
             if(DDinput.getText().length()==1){
                 OneDigitDay = (String.format(0 + DDinput.getText()));
@@ -113,7 +121,7 @@ public class CreditCardChecker extends Application {
                 OneDigitMonth = MMinput.getText();
             }
 
-            Date inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
+             inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
 
             if ((cardNumbWithoutSpaces).matches("^[\\d]{12,19}$") && (CCVLenght == 3) &&
                     (todaysDate.before(inputDate) || df.format(todaysDate).equals(df.format(inputDate))) &&

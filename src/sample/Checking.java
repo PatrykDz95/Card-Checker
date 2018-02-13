@@ -2,11 +2,14 @@ package sample;
 
 import javafx.scene.control.TextField;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 public class Checking {
 
+    /**
+     * Checks the inserted Card number after deleting the spaces (if there were any)
+     * and checks which company's card is it
+     * @param cardNumbWithoutSpaces Card number without spaces
+     * @param Company Text field which displays the company of the card
+     */
     public void CompanyName(String cardNumbWithoutSpaces, TextField Company){
 
         if(cardNumbWithoutSpaces.matches("^4[0-9]{6,}$")){
@@ -26,11 +29,22 @@ public class Checking {
         }
     }
 
+    /**
+     * Cheking if the numbers of inserted day's and month's isn't out of range
+     * @param dayBox input day from TextField
+     * @param monthBox input month from TextField
+     * @return true if the the day of month isn't bigger than 31 or lower than 0
+     * and the number of months aren't bigger than 12 or less than 1 else return's false
+     */
     public boolean DayMonthInput(int dayBox, int monthBox) {
-        return dayBox <= 31 && monthBox <= 12;
+        return dayBox <= 31 && dayBox >0 && monthBox <= 12 && monthBox >0;
     }
 
-
+    /**
+     *  Checks the Luhn algorithm
+     * @param CardNumbNoSpace Card number without spaces
+     * @return true if the CardNumbNoSpace is correct
+     */
     public boolean LuhnAlgorithm(String CardNumbNoSpace) {
         int sum = 0;
         boolean alternate = false;
@@ -46,27 +60,6 @@ public class Checking {
             alternate = !alternate;
         }
         return (sum % 10 == 0);
-    }
-
-    public Date ZerosInDate(TextField DDinput, TextField MMinput, TextField YYYYinput,
-                            String OneDigitDay, String OneDigitMonth, Date inputDate,  DateFormat df) {
-        try {
-            if(DDinput.getText().length()==1){
-                OneDigitDay = (String.format( 0 + DDinput.getText()));
-            }else{
-                OneDigitDay = DDinput.getText();
-            }
-            if(MMinput.getText().length()==1){
-                OneDigitMonth = (String.format( 0 + MMinput.getText()));
-            }else{
-                OneDigitMonth = MMinput.getText();
-            }
-
-            inputDate = df.parse(OneDigitDay + OneDigitMonth + YYYYinput.getText());
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-        return inputDate;
     }
     }
 
